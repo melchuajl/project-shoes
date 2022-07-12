@@ -15,31 +15,31 @@ module.exports = function (sequelize) {
         allowNull: false,
       },
       description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      sku: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: "img_url",
       },
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
         field: "last_name",
       },
-      email: {
-        type: DataTypes.STRING,
+      category: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        field: "category_id",
       },
-      pwd: {
-        type: DataTypes.STRING,
+      price: {
+        type: DataTypes.DECIMAL,
         allowNull: false,
-      },
-      shippingAdd: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        field: "shipping_address",
-      },
-      billingAdd: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        field: "billing_address",
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -49,6 +49,10 @@ module.exports = function (sequelize) {
         type: DataTypes.DATE,
         field: "updated_at",
       },
+      deletedAt: {
+        type: DataTypes.DATE,
+        field: "deleted_at",
+      }
     },
     {
       sequelize,
