@@ -23,6 +23,11 @@ async function testConnection() {
 // IMPORT MODELS
 const Product = require('./product.model')(sequelize);
 
+// ASSOCIATIONS
+Product.belongsTo(Category, {
+    foreignKey:"category"
+});
+
 module.exports = {
     sequelize,
     testConnection,
