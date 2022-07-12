@@ -3,34 +3,40 @@ const { DataTypes, Model } = require("sequelize");
 module.exports = function (sequelize) {
   class Product extends Model {}
 
-  Customer.init(
+  Product.init(
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        autoIncrement: true
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: false
       },
       sku: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
       },
       image: {
         type: DataTypes.STRING,
         allowNull: false,
-        field: "img_url",
+        field: "img_url"
       },
       categoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: "category_id",
+        field: "category_id"
+      },
+      remainingInventory: {
+        type: DataTypes.INTEGER, 
+        allowNull: false, 
+        field: "inventory"
       },
       price: {
         type: DataTypes.DECIMAL,
@@ -38,21 +44,21 @@ module.exports = function (sequelize) {
       },
       createdAt: {
         type: DataTypes.DATE,
-        field: "created_at",
+        field: "created_at"
       },
       updatedAt: {
         type: DataTypes.DATE,
-        field: "updated_at",
+        field: "updated_at"
       },
       deletedAt: {
         type: DataTypes.DATE,
-        field: "deleted_at",
+        field: "deleted_at"
       }
     },
     {
       sequelize,
       modelName: "Product",
-      tableName: "products",
+      tableName: "products"
     }
   );
 
