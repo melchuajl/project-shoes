@@ -7,8 +7,8 @@ module.exports = function (sequelize) {
         {
             id: {
                 type: DataTypes.INTEGER,
+                primaryKey: true,
                 autoIncrement: true,
-                allowNull: false,
             },
             productID: {
                 type: DataTypes.INTEGER,
@@ -23,16 +23,13 @@ module.exports = function (sequelize) {
             },
             createdAt: {
                 type: DataTypes.DATE,
-                autoIncrement: true,
                 allowNull: false,
                 field: "created_at"
             },
             updatedAt: {
                 type: DataTypes.DATE,
-                autoIncrement: true,
                 allowNull: false,
                 field: "updated_at"
-
             }
         },
         {
