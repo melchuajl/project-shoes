@@ -27,12 +27,7 @@ module.exports = function (sequelize) {
         allowNull: false,
         field: "img_url",
       },
-      lastName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        field: "last_name",
-      },
-      category: {
+      categoryId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: "category_id",
