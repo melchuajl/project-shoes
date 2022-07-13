@@ -3,7 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 
 router.get("/owner", (req, res, next) => {
-    return res.send("You have called an owner protected route");
+    res.send("You have called an owner protected route");
     next();
 });
 

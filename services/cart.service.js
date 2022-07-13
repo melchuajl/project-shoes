@@ -21,20 +21,28 @@ module.exports = {
         }
     },
 
-    display: async (id) => {
+    display: async () => {
 
-        const cart = await Cart.findAll({ where: { id: id } });
+        const cart = await Cart.findAll();
         return cart;
     },
 
-    delete: async (productID, quantity) => {
+    edit: async (productID, quantity) => {
+
+        const editProduct = await Cart.findOne({ where: { productID: productID } });
+
+        if (editProduct) {
+            editProduct.quantity = quantity;
+            editProduct.save();
+        } 
+
+    },
+
+    delete: async (productID) => {
 
         const deleteProduct = await Cart.findOne({ where: { productID: productID } });
 
-        if (deleteProduct) {
-            deleteProduct.quantity -= quantity;
-            deleteProduct.save();
-        } 
-
+        await deleteProduct.destroy();
+        return deleteProduct;
     }
 }
