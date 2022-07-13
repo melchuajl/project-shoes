@@ -47,7 +47,7 @@ class ProductController {
             return res.json({ message: "ID field cannot be empty" })
         }
 
-        if (typeof id !== "number" || typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryId !== "number" || typeof remainingInventory !== "numer" || typeof price !== "string") {
+        if (typeof id !== "number" || typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryId !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
             res.status(400);
             return res.json({ message: "Incorrect request data" })
         }

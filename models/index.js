@@ -19,14 +19,20 @@ const sequelize = new Sequelize('dcimlucjej1p1k', 'asfaamshpartmm', 'f499ccb4058
 // IMPORT MODELS
 const Product = require('./product.model')(sequelize);
 const Category = require('./category.model')(sequelize);
+const Cart = require('./cart.model')(sequelize);
 
 // ASSOCIATIONS
 Product.belongsTo(Category, {
     foreignKey: "category_id"
 });
 
+Cart.belongsTo(Product, {
+    foreignKey: "product_id"
+})
+
 module.exports = {
     sequelize,
-    Product, 
-    Category
+    Product,
+    Category,
+    Cart
 }
