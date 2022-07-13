@@ -1,15 +1,12 @@
-// require('dotenv').config()
-// const express = require('express')
-// const app = express()
+require('dotenv').config();
+const app = require('./routes');
  
-// app.get('/', function (req, res) {
-//   res.send('Hello World')
-// })
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+
+const PORT = process.env.PORT; 
  
-// app.listen(process.env.PORT)
-
-
-const app = require('./routes/main.index');
-app.listen(3008, () => {
-  console.log('Listening to port 3008...');
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}...`)
 })
