@@ -17,16 +17,11 @@ const sequelize = new Sequelize('dcimlucjej1p1k', 'asfaamshpartmm', 'f499ccb4058
 // })
 
 // IMPORT MODELS
-const Product = require('./product.model')(sequelize);
-const Category = require('./category.model')(sequelize);
+const Customer = require('./user.model')(sequelize);
 
 // ASSOCIATIONS
-Product.belongsTo(Category, {
-    foreignKey: "category_id"
-});
 
 module.exports = {
     sequelize,
-    Product, 
-    Category
+    Customer
 }

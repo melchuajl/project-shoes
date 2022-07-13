@@ -1,8 +1,8 @@
-const express = require('express');
-const publicRoutes = require('./public.routes'); 
+const express = require('express'); 
+const userRoutes = require('./user.routes');
 const app = express();
 
 app.use(express.json()); 
-app.use(publicRoutes);
+app.use(userRoutes);
 
 module.exports = app; 
