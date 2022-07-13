@@ -12,13 +12,11 @@ module.exports = function (sequelize) {
             },
             productID: {
                 type: DataTypes.INTEGER,
-                autoIncrement: true,
                 allowNull: false,
                 field: "product_id"
             },
             quantity: {
                 type: DataTypes.INTEGER,
-                autoIncrement: true,
                 allowNull: false,
             },
             createdAt: {

@@ -1,22 +1,23 @@
-const Cart = require("../models/cart.model");
+const { Cart } = require("../models/");
 
 module.exports = {
-    add: async(productID, quantity) => {
-        let result = {
-            message: null,
-            status: null,
-            data: null,
-          };      
+    add: async (productID, quantity) => {
 
-        const CartItem = await Cart.create({
-            productID: productID,
-            quantity: quantity
-        });
+        const existingProduct = await Cart.findOne({ where: { productID: productID } });
 
-        await CartItem.save();
-        result.data = newReview;
-        result.status = 200;
-        result.message = "Added!!!";
-        return result;
+        // If product already exists in cart, only quantity will be changed
+        if (existingProduct) {
+            existingProduct.quantity += quantity;
+            existingProduct.save();
+        }
+
+        // If product not found, create new cart item
+        if (!existingProduct) {
+            const newProduct = await Cart.create({
+                productID: productID,
+                quantity: quantity
+            });
+            return newProduct.save();
+        }
     }
 }
