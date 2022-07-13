@@ -47,7 +47,7 @@ module.exports = {
         const productToDelete = await Product.findByPk(id);
 
         if (!productToDelete) {
-            throw new Error(`Product SKU ${sku} does not exist`);
+            throw new Error(`Product ID ${id} does not exist`);
         }
 
         await productToDelete.destroy();
