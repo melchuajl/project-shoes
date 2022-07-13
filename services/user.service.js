@@ -3,68 +3,66 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 /* const fs = require("fs"); */
 
-
 module.exports = {
-	register: async (firstName, lastName, email, pwd, shippingAddress, billingAddress, contact) => {
-		const result = {
-			status: null,
-			message: null,
-			data: null,
-		};
+  register: async (
+    firstName,
+    lastName,
+    email,
+    pwd,
+    shippingAddress,
+    billingAddress,
+    contact
+  ) => {
 
-		const existingUser = await Customer.findone({where : {email: email}});
+    const existingUser = await Customer.findOne({ where: { email: email } });
 
-		if (existingUser) {
-			throw new Error (`email ${email} is already registered`);
-		}
+    if (existingUser) {
+      throw new Error(`email ${email} is already registered`);
+    }
 
-		bcrypt.hash(pwd, 10, (err,hash) => {
-			let newUser;
-			if (err) {
-				throw new Error(`Hashing error: ${err}`);
-			}
-			newUser = Customer.create({
-				firstName: firstName,
-				lastName: lastName,
-				email: email,
-				pwd: hash,
-				shippingAddress: shippingAddress,
-				billingAddress: billingAddress,
-				contact: contact		
-			});
-			return newUser.save();
-		});
-	},
+    bcrypt.hash(pwd, 10, (err, hash) => {
+      let newUser;
+      if (err) {
+        throw new Error(`Hashing error: ${err}`);
+      }
+      newUser = Customer.create({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        pwd: hash,
+        shippingAddress: shippingAddress,
+        billingAddress: billingAddress,
+        contact: contact,
+      });
+      return newUser.save();
+    });
+  },
 
-	login: async (email, pwd) => {
-		const result = {
-			status: null,
-			message: null,
-			data: null,
-		};
-		try {
-			let user = await Customer.findOne({ where: { email: email } });
+  login: async (email, pwd) => {
 
-			if (user && (await bcrypt.compare(pwd, user.pwd))) {
-				// Create token
-				const token = jwt.sign({ user_id: user._id, email }, process.env.TOKEN_KEY, {
-					expiresIn: "2h",
-				});
-				// save user token
-				user.token = token;
+    const user = await Customer.findOne({ where: { email: email } });
 
-				result.status = 200;
-				result.message = "Login successful";
-				result.data = user;
-				return result;
-			}
-			result.status = 400;
-			result.message = "Invalid credentials";
-			return result;
-		} catch (err) {
-			console.log("user login error caught", err);
-		}
-	},
+    if (!user) {
+      throw new Error(`Email ${email} does not exist`);
+    }
 
-	
+    const pwdMatch = await bcrypt.compare(pwd, user.pwd);
+
+    if (!pwdMatch) {
+      throw new Error("Password does not match");
+    }
+
+    if (pwdMatch) {
+      const loginData = {
+        id: user.id,
+        email: user.email,
+      };
+
+      const token = jwt.sign(loginData, process.env.TOKEN_KEY, {
+        expiresIn: "2h",
+      });
+      console.log(token);
+      return token;
+    }
+  },
 };
