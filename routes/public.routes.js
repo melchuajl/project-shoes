@@ -12,10 +12,11 @@ const productController = new ProductController();
 router.get("/public/products/:categoryId", productController.display);
 
 //Cart
-// const CartController = require("../controllers/cart.controller");
-// const cartController = new CartController();
+const CartController = require("../controllers/cart.controller");
+const cartController = new CartController();
 
-// router.get("/public/cart/:productID", cartController.display);
+router.get("/public/cart/", cartController.display)
+router.post("/public/cart/", cartController.add);
 
 //JUST FOR TESTING PLEASE DELETE
 // router.post("/public/products/", productController.add);
