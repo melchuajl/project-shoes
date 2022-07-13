@@ -7,5 +7,6 @@ const publicRoutes = require('./public.routes');
 
 //CONFIGURE ROUTES
 app.use(publicRoutes);
+// app.use(userRoutes);
 
 module.exports = app; 
