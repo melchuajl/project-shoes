@@ -18,7 +18,4 @@ const cartController = new CartController();
 router.get("/public/cart/:id", cartController.display)
 router.post("/public/cart/", cartController.add);
 
-//JUST FOR TESTING PLEASE DELETE
-// router.post("/public/products/", productController.add);
-
 module.exports = router; 

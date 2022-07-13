@@ -2,7 +2,7 @@ const productService = require('../services/product.service');
 
 class ProductController {
 
-    //POST owner/product
+    //POST owner/products
     async add(req, res) {
 
         const { name, description, sku, image, categoryId, remainingInventory, price } = req.body;
@@ -31,7 +31,7 @@ class ProductController {
         }
     }
 
-    //PUT owner/product/:id
+    //PUT owner/products/:id
     async update(req, res) {
 
         const { id, name, description, sku, image, categoryId, remainingInventory, price } = req.body;
@@ -66,7 +66,7 @@ class ProductController {
 
     }
 
-    //DELETE owner/product/:id 
+    //DELETE owner/products/:id 
     async delete(req, res) {
 
         const id = req.params.id;
