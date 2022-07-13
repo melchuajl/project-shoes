@@ -5,10 +5,17 @@ router.get("/public", (req, res) => {
     return res.send("You have called a public route");
 });
 
+//Products
 const ProductController = require('../controllers/product.controller');
 const productController = new ProductController();
 
 router.get("/public/products/:categoryId", productController.display);
+
+//Cart
+const CartController = require("../controllers/cart.controller");
+const cartController = new CartController();
+
+router.get("/public/cart/:productID", cartController.display);
 
 //JUST FOR TESTING PLEASE DELETE
 // router.post("/public/products/", productController.add);
