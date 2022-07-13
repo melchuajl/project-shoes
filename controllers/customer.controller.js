@@ -1,27 +1,25 @@
-const { now } = require('sequelize/types/utils');
-const productService = require('../services/product.service');
+const customerService = require('../services/customer.service');
 
-class ProductController {
+class CustomerController {
 
-    //POST owner/product
     async add(req, res) {
 
-        const { name, description, sku, image, categoryId, remainingInventory, price } = req.body;
-
+        const { firstName, lastName, email, pwd, shippingAddress, billingAddress, contact} = req.body;
+        
         let result = {
             message: null,
             status: null,
             data: null,
         };
-
-        if (!name || !description || !sku || !image || !categoryId || !remainingInventory || !price) {
+        
+        if (!firstName || !lastName || !email || !pwd || !shippingAddress || !billingAddress || !contact) {
             res.status(400);
-            return res.json({ message: "Incomplete input fields" })
+            return res.json({ message: "Incomplete input fields, please check again"})
         }
 
         try {
-            const data = await productService.add(name, description, sku, image, categoryId, remainingInventory, price);
-            result.message = "New product added!";
+            const data = await customerService.add(firstName, lastName, email, pwd, shippingAddress, billingAddress, contact);
+            result.message = "Account created successfully!";
             result.status = 200;
             result.data = data;
         } catch (error) {
@@ -31,11 +29,11 @@ class ProductController {
             return res.json(result);
         }
     }
+    
 
-    //PUT owner/product/:id
     async update(req, res) {
 
-        const { id, name, description, sku, image, categoryId, remainingInventory, price } = req.body;
+        const { firstName, lastName, email, pwd, shippingAddress, billingAddress, contact } = req.body;
 
         let result = {
             message: null,
@@ -48,14 +46,14 @@ class ProductController {
             return res.json({ message: "ID field cannot be empty" })
         }
 
-        if (typeof id !== "number" || typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryId !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
+        if (typeof id !== "number" || typeof firstName !== "string" || typeof lastName !== "string" || typeof email !== "string" || typeof pwd !== "string" || typeof shippingAddress !== "string" || typeof billingAddress !== "string" || typeof contact !== "number") {
             res.status(400);
             return res.json({ message: "Incorrect request data" })
         }
 
         try {
-            const data = await productService.update(id, name, description, sku, image, categoryId, remainingInventory, price);
-            result.message = "Product updated";
+            const data = await customerService.update(firstName, lastName, email, pwd, shippingAddress, billingAddress, contact);
+            result.message = "Account details updated";
             result.status = 200;
             result.data = data;
         } catch (error) {
@@ -67,7 +65,6 @@ class ProductController {
 
     }
 
-    //DELETE owner/product/:id 
     async delete(req, res) {
 
         const id = req.params.id;
@@ -79,8 +76,8 @@ class ProductController {
         };
 
         try {
-            const data = await productService.delete(id);
-            result.message = "Product deleted";
+            const data = await customerService.delete(id);
+            result.message = "Account deleted";
             result.status = 200;
             result.data = data;
         } catch (error) {
@@ -92,10 +89,9 @@ class ProductController {
 
     }
 
-    //GET public/products/:categoryId
     async display(req, res) {
 
-        const categoryId = req.params.categoryId;
+        const id = req.params.id;
 
         let result = {
             message: null,
@@ -104,8 +100,8 @@ class ProductController {
         };
 
         try {
-            const data = await productService.display(categoryId);
-            result.message = "Displaying products";
+            const data = await customerService.display(id);
+            result.message = "Displaying all customers";
             result.status = 200;
             result.data = data;
         } catch (error) {
@@ -115,7 +111,6 @@ class ProductController {
             return res.json(result);
         }
     }
-
 }
 
-module.exports = ProductController; 
+module.exports = CustomerController;
