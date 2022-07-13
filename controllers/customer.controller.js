@@ -4,17 +4,17 @@ class CustomerController {
 
     async add(req, res) {
 
-        const { firstName, lastName, email, pwd, shippingAddress, billingAddress, contact} = req.body;
-        
+        const { firstName, lastName, email, pwd, shippingAddress, billingAddress, contact } = req.body;
+
         let result = {
             message: null,
             status: null,
             data: null,
         };
-        
+
         if (!firstName || !lastName || !email || !pwd || !shippingAddress || !billingAddress || !contact) {
             res.status(400);
-            return res.json({ message: "Incomplete input fields, please check again"})
+            return res.json({ message: "Incomplete input fields, please check again" })
         }
 
         try {
@@ -29,11 +29,11 @@ class CustomerController {
             return res.json(result);
         }
     }
-    
+
 
     async update(req, res) {
 
-        const { firstName, lastName, email, pwd, shippingAddress, billingAddress, contact } = req.body;
+        const { id, firstName, lastName, email, pwd, shippingAddress, billingAddress, contact } = req.body;
 
         let result = {
             message: null,

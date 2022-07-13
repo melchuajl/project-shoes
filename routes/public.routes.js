@@ -18,4 +18,12 @@ const cartController = new CartController();
 router.get("/public/cart/:id", cartController.display)
 router.post("/public/cart/", cartController.add);
 
-module.exports = router; 
+//Users
+const UserController = require('../controllers/user.controller');
+const userController = new UserController();
+
+router.post('/public/user/register', userController.register);
+router.post('/public/user/login', userController.login);
+// router.get('/public/user', userController.retrieve);
+
+module.exports = router;
