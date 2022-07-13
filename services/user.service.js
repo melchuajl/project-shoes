@@ -1,4 +1,4 @@
-const { Customer } = require("../models/user.index");
+const { Customer } = require("../models/cart.main.index");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 /* const fs = require("fs"); */
