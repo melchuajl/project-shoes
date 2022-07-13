@@ -21,7 +21,7 @@ class ProductController {
         try {
             const data = await productService.add(name, description, sku, image, categoryId, remainingInventory, price);
             result.message = "New product added!";
-            result.status = 200;
+            result.status = 201; // status code for 'Created'
             result.data = data;
         } catch (error) {
             res.message = error.message;
@@ -80,7 +80,7 @@ class ProductController {
         try {
             const data = await productService.delete(id);
             result.message = "Product deleted";
-            result.status = 200;
+            result.status = 204; 
             result.data = data;
         } catch (error) {
             res.message = error.message;

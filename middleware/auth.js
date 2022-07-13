@@ -9,7 +9,7 @@ module.exports = {
         const token = req.headers.token;
 
         if (!token) {
-            res.status(401);
+            res.status(401); // status code for 'Unauthorised: authentication required'
             return res.json({ message: "Please log in"});
         }
 
@@ -26,7 +26,7 @@ module.exports = {
     isOwner: async (req, res, next) => {
 
         if(req.user.role.toLowerCase() !== 'owner') {
-            res.status(401); 
+            res.status(403); // status code for 'Forbidden'
             return res.json({ message: "Owner access only"})
         }
         next(); 

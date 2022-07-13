@@ -16,6 +16,17 @@ const sequelize = new Sequelize('lesson_db', 'melissachua', '', {
     dialect: 'postgres'
 })
 
+async function testConnection() {
+    try {
+        await sequelize.authenticate();
+        console.log("Connection has been established successfully.");
+        return true;
+    } catch (error) {
+        console.error("Unable to connect to the database:", error);
+        return false;
+    }
+};
+
 // IMPORT MODELS
 const Product = require('./product.model')(sequelize);
 const Category = require('./category.model')(sequelize);
@@ -33,8 +44,9 @@ Cart.belongsTo(Product, {
 
 module.exports = {
     sequelize,
+    testConnection,
     Product,
     Category,
-    Cart, 
+    Cart,
     Customer
 }
