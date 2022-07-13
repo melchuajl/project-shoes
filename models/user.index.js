@@ -15,10 +15,10 @@ const { Sequelize } = require('sequelize');
 //     }
 // });
 
-const sequelize = new Sequelize("lesson_db", "postgres", "sandwich94", {
-    host: "localhost",
-    dialect: "postgres",
-  });
+// const sequelize = new Sequelize("lesson_db", "postgres", "sandwich94", {
+//     host: "localhost",
+//     dialect: "postgres",
+//   });
 
 // IMPORT MODELS
 const Product = require('./product.model')(sequelize);
