@@ -2,9 +2,11 @@ const userService = require("../services/user.service");
 
 class UserController {
 
-	async register(req, res, next) {
+	async register(req, res) {
 
-		if (!req.body.email || !req.body.pwd)
+		const {firstName, lastName, email, pwd, shippingAddress, billingAddress, contact} = req.body;
+
+		if (!firstName || !req.body.email || !req.body.pwd || !req.body.shippingAddress || !req.body.billingAddress || !req.body.contact )
 			 {
 			res.status(400);
 			return res.json({ message: "Please check all input fields" });
