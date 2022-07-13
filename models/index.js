@@ -11,25 +11,22 @@ const sequelize = new Sequelize('dcimlucjej1p1k', 'asfaamshpartmm', 'f499ccb4058
     }
 });
 
-async function testConnection() {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-};
+// const sequelize = new Sequelize('lesson_db', 'melissachua', '', {
+//     host: 'localhost',
+//     dialect: 'postgres'
+// })
 
 // IMPORT MODELS
 const Product = require('./product.model')(sequelize);
+const Category = require('./category.model')(sequelize);
 
 // ASSOCIATIONS
 Product.belongsTo(Category, {
-    foreignKey:"category"
+    foreignKey: "category_id"
 });
 
 module.exports = {
     sequelize,
-    testConnection,
-    Product
+    Product, 
+    Category
 }
