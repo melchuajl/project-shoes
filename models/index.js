@@ -15,7 +15,7 @@ const { Sequelize } = require('sequelize');
 //     }
 // });
 
-const sequelize = new Sequelize("assignment_3_5", "postgres", "sandwich94", {
+const sequelize = new Sequelize("lesson_db", "postgres", "sandwich94", {
     host: "localhost",
     dialect: "postgres",
   });

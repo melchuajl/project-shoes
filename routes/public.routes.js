@@ -15,8 +15,10 @@ router.get("/public/products/:categoryId", productController.display);
 const CartController = require("../controllers/cart.controller");
 const cartController = new CartController();
 
-router.get("/public/cart/:id", cartController.display)
+router.get("/public/cart/", cartController.display)
 router.post("/public/cart/", cartController.add);
+router.put("/public/cart/", cartController.edit);
+router.delete("/public/cart/", cartController.delete);
 
 //Users
 const UserController = require('../controllers/user.controller');
