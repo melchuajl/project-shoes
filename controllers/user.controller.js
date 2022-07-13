@@ -2,30 +2,30 @@ const userService = require("../services/user.service");
 
 class UserController {
 
-	async register(req, res) {
-		const { email, pwd } = req.body;
+	async register(req, res, next) {
 
 		if (!req.body.email || !req.body.pwd)
 			 {
-			return res.status(400).json({ message: "Please check email and username" });
+			res.status(400);
+			return res.json({ message: "Please check all input fields" });
 		}
 
-/* 		let result = {
+		let result = {
 			message: null,
 			status: null,
 			data: null,
-		}; */
+		};
 
 		try {
-			const result = await userService.register(
-				email.trim().toLowerCase(),
-				pwd
-			);
-			res.status(result.status);
-			return res.json({ data: result.data, message: result.message });
+			const data = await userService.register(req.body.email, req.body.pwd);
+			result.message = "New user registration successful";
+			result.status = 200;
+			result.data = data;
 		} catch (err) {
-			console.log("register controller error caught", err);
-			return res.status(400).json({ message: err });
+			result.message = error.message;
+			result.status = 400;
+		} finally {
+			return res.json(result);
 		}
 	}
 
