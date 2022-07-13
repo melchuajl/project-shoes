@@ -1,4 +1,3 @@
-// const { now } = require('sequelize/types/utils');
 const productService = require('../services/product.service');
 
 class ProductController {
