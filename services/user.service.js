@@ -13,19 +13,17 @@ module.exports = {
     billingAddress,
     contact
   ) => {
-
     const existingUser = await Customer.findOne({ where: { email: email } });
 
     if (existingUser) {
       throw new Error(`email ${email} is already registered`);
     }
 
-    bcrypt.hash(pwd, 10, (err, hash) => {
-      let newUser;
+    bcrypt.hash(pwd, 10, async (err, hash) => {
       if (err) {
         throw new Error(`Hashing error: ${err}`);
       }
-      newUser = Customer.create({
+      const newUser = await Customer.create({
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -39,7 +37,6 @@ module.exports = {
   },
 
   login: async (email, pwd) => {
-
     const user = await Customer.findOne({ where: { email: email } });
 
     if (!user) {
