@@ -19,5 +19,22 @@ module.exports = {
             });
             return newProduct.save();
         }
+    },
+
+    display: async (id) => {
+
+        const cart = await Cart.findAll({ where: { id: id } });
+        return cart;
+    },
+
+    delete: async (productID, quantity) => {
+
+        const deleteProduct = await Cart.findOne({ where: { productID: productID } });
+
+        if (deleteProduct) {
+            deleteProduct.quantity -= quantity;
+            deleteProduct.save();
+        } 
+
     }
 }

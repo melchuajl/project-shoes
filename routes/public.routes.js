@@ -15,7 +15,7 @@ router.get("/public/products/:categoryId", productController.display);
 const CartController = require("../controllers/cart.controller");
 const cartController = new CartController();
 
-router.get("/public/cart/", cartController.display)
+router.get("/public/cart/:id", cartController.display)
 router.post("/public/cart/", cartController.add);
 
 //JUST FOR TESTING PLEASE DELETE

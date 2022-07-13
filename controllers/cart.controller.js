@@ -23,10 +23,58 @@ class CartController {
             result.message = "Product added to cart!"
             result.data = data;
         } catch (error) {
-            result.status = 400; 
+            result.status = 400;
             res.message = error.message;
         } finally {
-            return res.json(result); 
+            return res.json(result);
+        }
+
+    }
+
+    // GET
+    async display(req, res) {
+
+        const cartDisplay = req.params.id;
+
+        let result = {
+            message: null,
+            status: null,
+            data: null,
+        };
+
+        try {
+            const data = await cartService.display(cartDisplay)
+            result.message = "Displaying cart";
+            result.status = 200;
+            result.data = data;
+        } catch (error) {
+            result.message = error.message;
+            result.status = 400;
+        } finally {
+            return res.json(result);
+        }
+    }
+
+    async delete(req, res) {
+
+        const { productID, quantity } = req.body;
+
+        let result = {
+            message: null,
+            status: null,
+            data: null,
+        };
+
+        try {
+            const data = await cartService.delete(productID, quantity);
+            result.status = 200;
+            result.message = "Product deleted from cart!"
+            result.data = data;
+        } catch (error) {
+            result.status = 400;
+            res.message = error.message;
+        } finally {
+            return res.json(result);
         }
 
     }
