@@ -11,6 +11,7 @@ const { Sequelize } = require('sequelize');
 //     }
 // });
 
+
 const sequelize = new Sequelize('lesson_db', 'melissachua', '', {
     host: 'localhost',
     dialect: 'postgres'
