@@ -49,6 +49,10 @@ module.exports = {
         return customerToDelete;
     },
 
-    //TO ADD DISPLAY FOR GET
+    display: async () => {
+        
+        const customer = await Customer.findAll();
+        return customer; 
+    },
 
 }
