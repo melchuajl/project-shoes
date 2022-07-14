@@ -11,10 +11,18 @@ const sequelize = new Sequelize('dcimlucjej1p1k', 'asfaamshpartmm', 'f499ccb4058
     }
 });
 
+<<<<<<< HEAD
 // const sequelize = new Sequelize('lesson_db', 'melissachua', '', {
 //     host: 'localhost',
 //     dialect: 'postgres'
 // })
+=======
+
+const sequelize = new Sequelize('lesson_db', 'melissachua', '', {
+    host: 'localhost',
+    dialect: 'postgres'
+})
+>>>>>>> a558450c0b37cbed3588cfb02638c34072deba34
 
 async function testConnection() {
     try {
