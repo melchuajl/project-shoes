@@ -101,7 +101,7 @@ class CustomerController {
 
         try {
             const data = await customerService.display(id);
-            result.message = "Displaying all customers";
+            result.message = "Displaying customer profile";
             result.status = 200;
             result.data = data;
         } catch (error) {

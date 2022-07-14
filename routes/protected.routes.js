@@ -2,12 +2,8 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 
-router.get("/protected", (req, res) => {
-    return res.send("You have called a protected route");
-});
-
-router.get("/protected/owner", (req, res, next) => {
-    res.send("You have called an owner protected route");
+router.use("/protected", (req, res, next) => {
+    console.log("You have called a protected route");
     next();
 });
 
@@ -15,10 +11,9 @@ router.get("/protected/owner", (req, res, next) => {
 const CustomerController = require("../controllers/customer.controller");
 const customerController = new CustomerController();
 
-//SHOULD NOT BE POST
-router.post("/protected/onboard", customerController.add);
-//DELETE
-//DISPLAY
+router.put("/protected/user/:id", auth.isLoggedIn, customerController.update);
+router.delete("/protected/user/:id", auth.isLoggedIn, customerController.delete);
+router.get("/protected/user/:id", auth.isLoggedIn, customerController.display);
 
 //Products
 const ProductController = require('../controllers/product.controller');

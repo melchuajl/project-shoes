@@ -4,7 +4,7 @@ module.exports = {
 
     add: async (firstName, lastName, email, pwd, shippingAddress, billingAddress, contact) => {
 
-        const existingCustomer = await Customer.findOne({ where: { email: email }});
+        const existingCustomer = await Customer.findOne({ where: { email: email } });
 
         if (existingCustomer) {
             throw new Error('Account already exists');
@@ -43,12 +43,24 @@ module.exports = {
 
     delete: async (email) => {
 
-        const customerToDelete = await Customer.findByPk(email);
+        const customerToDelete = await Customer.findOne({ where: { email: email } });
 
         await customerToDelete.destroy();
         return customerToDelete;
     },
 
-    //TO ADD DISPLAY FOR GET
+    //GET /protected/user/:id
+    display: async (id) => {
 
+        const customer = await Customer.findByPk(id);
+        const infoToDisplay = {
+            firstName: customer.firstName, 
+            lastName: customer.lastName, 
+            email: customer.email, 
+            shippingAddress: customer.shippingAddress, 
+            billingAddress: customer.billingAddress,
+            contact: customer.contact
+        }
+        return infoToDisplay;
+    }
 }

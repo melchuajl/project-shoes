@@ -24,7 +24,7 @@ class CartController {
             result.data = data;
         } catch (error) {
             result.status = 400;
-            res.message = error.message;
+            result.message = error.message;
         } finally {
             return res.json(result);
         }
@@ -71,7 +71,7 @@ class CartController {
             result.data = data;
         } catch (error) {
             result.status = 400;
-            res.message = error.message;
+            result.message = error.message;
         } finally {
             return res.json(result);
         }

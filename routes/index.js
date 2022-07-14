@@ -4,11 +4,10 @@ app.use(express.json());
 
 //IMPORT ROUTES
 const publicRoutes = require('./public.routes'); 
-const ownerRoutes = require('./owner.routes'); 
+const protectedRoutes = require('./protected.routes'); 
 
 //CONFIGURE ROUTES
 app.use(publicRoutes);
-// app.use(userRoutes);
-app.use(ownerRoutes); 
+app.use(protectedRoutes); 
 
 module.exports = app; 

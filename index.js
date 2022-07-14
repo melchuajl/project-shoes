@@ -1,5 +1,8 @@
 require('dotenv').config();
 const app = require('./routes');
+const { testConnection } = require('./models/index'); 
+
+testConnection();
  
 app.get('/', function (req, res) {
   res.send('Hello World')
