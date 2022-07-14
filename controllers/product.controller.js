@@ -24,7 +24,7 @@ class ProductController {
             result.status = 201; // status code for 'Created'
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
@@ -34,7 +34,8 @@ class ProductController {
     //PUT owner/products/:id
     async update(req, res) {
 
-        const { id, name, description, sku, image, categoryId, remainingInventory, price } = req.body;
+        const id = req.params.id;
+        const { name, description, sku, image, categoryId, remainingInventory, price } = req.body;
 
         let result = {
             message: null,
@@ -42,12 +43,7 @@ class ProductController {
             data: null,
         };
 
-        if (!id) {
-            res.status(400);
-            return res.json({ message: "ID field cannot be empty" })
-        }
-
-        if (typeof id !== "number" || typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryId !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
+        if (typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryId !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
             res.status(400);
             return res.json({ message: "Incorrect request data" })
         }
@@ -58,7 +54,7 @@ class ProductController {
             result.status = 200;
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
@@ -83,7 +79,7 @@ class ProductController {
             result.status = 204; 
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
