@@ -15,10 +15,9 @@ router.get("/protected/owner", (req, res, next) => {
 const CustomerController = require("../controllers/customer.controller");
 const customerController = new CustomerController();
 
-//SHOULD NOT BE POST
-router.post("/protected/onboard", customerController.add);
-//DELETE
-//DISPLAY
+router.get("/protected/customers/", auth.isLoggedIn, customerController.display);
+router.put("/protected/customers/:id", auth.isLoggedIn, customerController.update);
+router.delete("/protected/customers/:id", auth.isLoggedIn, customerController.delete);
 
 //Products
 const ProductController = require('../controllers/product.controller');
