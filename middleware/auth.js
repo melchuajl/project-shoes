@@ -26,7 +26,10 @@ module.exports = {
 
     isOwner: async (req, res, next) => {
 
-        if (req.user.role.toLowerCase() !== 'owner') {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader.split(' ')[1];
+
+        if (token !== 'owner') {
             res.status(403); // status code for 'Forbidden'
             return res.json({ message: "Owner access only" })
         }
