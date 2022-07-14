@@ -54,7 +54,12 @@ module.exports = {
         return productToDelete;
     },
 
-    display: async (categoryId) => {
+    display: async () => {
+        const products = await Product.findAll({ include: Category });
+        return products;
+    },
+
+    category: async (categoryId) => {
         const products = await Product.findAll({ where: { categoryId: categoryId }, include: Category });
         return products;
     }

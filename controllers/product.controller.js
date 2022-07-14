@@ -87,8 +87,31 @@ class ProductController {
 
     }
 
-    //GET public/products/:categoryId
+    //GET public/products/
     async display(req, res) {
+
+        let result = {
+            message: null,
+            status: null,
+            data: null,
+        };
+
+        try {
+            const data = await productService.display();
+            result.message = "Displaying all products";
+            result.status = 200;
+            result.data = data;
+        } catch (error) {
+            console.log(error);
+            result.message = error.message;
+            result.status = 400;
+        } finally {
+            return res.json(result);
+        }
+    }
+
+    //GET public/products/:categoryId
+    async category(req, res) {
 
         const categoryId = req.params.categoryId;
 
@@ -100,10 +123,11 @@ class ProductController {
 
         try {
             const data = await productService.display(categoryId);
-            result.message = "Displaying products";
+            result.message = "Displaying specific products";
             result.status = 200;
             result.data = data;
         } catch (error) {
+            console.log(error);
             result.message = error.message;
             result.status = 400;
         } finally {
