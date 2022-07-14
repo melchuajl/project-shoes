@@ -23,7 +23,7 @@ class CustomerController {
             result.status = 200;
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
@@ -57,7 +57,7 @@ class CustomerController {
             result.status = 200;
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
@@ -81,7 +81,7 @@ class CustomerController {
             result.status = 200;
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);

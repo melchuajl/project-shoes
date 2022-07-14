@@ -18,8 +18,8 @@ class CategoryController {
             result.status = 200; 
             result.data = data; 
         } catch (error) {
-            res.message = error.message;
-            res.status = 400;
+            result.message = error.message;
+            result.status = 400;
         } finally {
             return res.json(result); 
         }
