@@ -114,6 +114,12 @@ class ProductController {
     //GET public/products/:categoryID
     async category(req, res) {
 
+        let result = {
+            message: null,
+            status: null,
+            data: null,
+        };
+
         const categoryID = req.params.categoryID;
 
         try {
