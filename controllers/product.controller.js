@@ -123,7 +123,7 @@ class ProductController {
         const categoryID = req.params.categoryID;
 
         try {
-            const data = await productService.display(categoryID);
+            const data = await productService.category(categoryID);
             result.message = "Displaying specific products";
 
             result.status = 200;

@@ -33,7 +33,7 @@ class CustomerController {
 
     async update(req, res) {
 
-        const { id, firstName, lastName, email, pwd, shippingAddress, billingAddress, contact } = req.body;
+        const { id, firstName, lastName, shippingAddress, billingAddress, contact } = req.body;
 
         let result = {
             message: null,
@@ -46,13 +46,8 @@ class CustomerController {
             return res.json({ message: "ID field cannot be empty" })
         }
 
-        if (typeof id !== "number" || typeof firstName !== "string" || typeof lastName !== "string" || typeof email !== "string" || typeof pwd !== "string" || typeof shippingAddress !== "string" || typeof billingAddress !== "string" || typeof contact !== "number") {
-            res.status(400);
-            return res.json({ message: "Incorrect request data" })
-        }
-
         try {
-            const data = await customerService.update(firstName, lastName, email, pwd, shippingAddress, billingAddress, contact);
+            const data = await customerService.update(id, firstName, lastName, shippingAddress, billingAddress, contact);
             result.message = "Account details updated";
             result.status = 200;
             result.data = data;

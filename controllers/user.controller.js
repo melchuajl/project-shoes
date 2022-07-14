@@ -45,7 +45,7 @@ class UserController {
         };
 
 		try {
-			const result = await userService.login(email, pwd);
+			const data = await userService.login(email, pwd);
 			result.message = "Login successful";
 			result.status = 200;
 			result.data = data;

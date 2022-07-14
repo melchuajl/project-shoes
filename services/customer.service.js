@@ -4,7 +4,7 @@ module.exports = {
 
     add: async (firstName, lastName, email, pwd, shippingAddress, billingAddress, contact) => {
 
-        const existingCustomer = await Customer.findOne({ where: { email: email }});
+        const existingCustomer = await Customer.findOne({ where: { email: email } });
 
         if (existingCustomer) {
             throw new Error('Account already exists');
@@ -22,24 +22,43 @@ module.exports = {
         return newCustomer.save();
     },
 
-    update: async (firstName, lastName, email, pwd, shippingAddress, billingAddress, contact) => {
+    // update: async (id, firstName, lastName, email, shippingAddress, billingAddress, contact) => {
 
-        const customerToUpdate = await Customer.findByPk(email);
+    //     const customerToUpdate = await Customer.findOne({ where: { id: id } });
+
+    //     if (!customerToUpdate) {
+    //         throw new Error('Account not found');
+    //     }
+    //     // customerToUpdate.email = email;
+    //     // customerToUpdate.firstName = firstName;
+    //     // customerToUpdate.lastName = lastName;
+    //     // customerToUpdate.shippingAddress = shippingAddress;
+    //     // customerToUpdate.billingAddress = billingAddress;
+    // //     customerToUpdate.contact = contact;
+    // //     // customerToUpdate.contact = contact;
+
+    //     await customerToUpdate.save();
+    //     return customerToUpdate;
+    // },
+
+    update: async (id, firstName, lastName, shippingAddress, billingAddress, contact) => {
+
+        const customerToUpdate = await Customer.findOne({ where: { id: id } });
 
         if (!customerToUpdate) {
             throw new Error('Account not found');
         }
 
-        customerToUpdate.firstName = firstName;
-        customerToUpdate.lastName = lastName;
-        customerToUpdate.pwd = pwd;
-        customerToUpdate.shippingAddress = shippingAddress;
-        customerToUpdate.billingAddress = billingAddress;
-        customerToUpdate.contact = contact;
+        if (firstName) customerToUpdate.firstName = firstName;
+        if (lastName) customerToUpdate.lastName = lastName;
+        if (shippingAddress) customerToUpdate.shippingAddress = shippingAddress;
+        if (billingAddress) customerToUpdate.billingddress = billingAddress;
+        if (contact) customerToUpdate.contact = contact;
 
         await customerToUpdate.save();
         return customerToUpdate;
     },
+
 
     delete: async (email) => {
 
@@ -50,9 +69,9 @@ module.exports = {
     },
 
     display: async () => {
-        
+
         const customer = await Customer.findAll();
-        return customer; 
+        return customer;
     },
 
 }
