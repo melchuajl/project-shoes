@@ -9,7 +9,9 @@ router.get("/public", (req, res) => {
 const ProductController = require('../controllers/product.controller');
 const productController = new ProductController();
 
-router.get("/public/products/:categoryID", productController.display);
+router.get("/public/products/", productController.display);
+router.get("/public/products/:categoryID", productController.category);
+
 
 //Cart
 const CartController = require("../controllers/cart.controller");
