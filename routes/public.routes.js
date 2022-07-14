@@ -10,7 +10,8 @@ const ProductController = require('../controllers/product.controller');
 const productController = new ProductController();
 
 router.get("/public/products/", productController.display);
-router.get("/public/products/:categoryId", productController.category);
+router.get("/public/products/:categoryID", productController.category);
+
 
 //Cart
 const CartController = require("../controllers/cart.controller");

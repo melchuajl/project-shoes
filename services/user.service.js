@@ -1,7 +1,6 @@
 const { Customer } = require("../models/index.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-/* const fs = require("fs"); */
 
 module.exports = {
   register: async (

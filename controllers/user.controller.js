@@ -23,7 +23,7 @@ class UserController {
 			result.message = "New user registration successful";
 			result.status = 200;
 			result.data = data;
-		} catch (err) {
+		} catch (error) {
 			res.message = error.message;
 			res.status = 400;
 		} finally {
@@ -50,7 +50,7 @@ class UserController {
 			result.status = 200;
 			result.data = data;
 
-		} catch (err) {
+		} catch (error) {
 			result.message = error.message;
 			result.status = 400;
 		} finally {
@@ -58,26 +58,26 @@ class UserController {
 		}
 	}
 
-	async retrieve(req, res) {
-        let result = {
-            message: null,
-            status: null,
-            data: null,
-        };
+	// async retrieve(req, res) {
+    //     let result = {
+    //         message: null,
+    //         status: null,
+    //         data: null,
+    //     };
 
-        try {
-            const data = await userServiceGetAll();
-            result.message = "Retrieval successful";
-            result.status = 200;
-            result.data = data;
-        } catch (error) {
-            result.message = error.message;
-            result.status = 400;
-        } finally {
-            return res.json(result);
-        }
+    //     try {
+    //         const data = await userServiceGetAll();
+    //         result.message = "Retrieval successful";
+    //         result.status = 200;
+    //         result.data = data;
+    //     } catch (error) {
+    //         result.message = error.message;
+    //         result.status = 400;
+    //     } finally {
+    //         return res.json(result);
+    //     }
 
-    }
+    // }
 }
 
 module.exports = UserController;

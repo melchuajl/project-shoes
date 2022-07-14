@@ -2,7 +2,7 @@ const { Product, Category } = require('../models/index');
 
 module.exports = {
 
-    add: async (name, description, sku, image, categoryId, remainingInventory, price) => {
+    add: async (name, description, sku, image, categoryID, remainingInventory, price) => {
 
         const existingProduct = await Product.findOne({ where: { sku: sku } });
 
@@ -15,14 +15,14 @@ module.exports = {
             description: description,
             sku: sku,
             image: image,
-            categoryId: categoryId,
+            categoryID: categoryID,
             remainingInventory: remainingInventory,
             price: price
         });
         return newProduct.save();
     },
 
-    update: async (id, name, description, sku, image, categoryId, remainingInventory, price) => {
+    update: async (id, name, description, sku, image, categoryID, remainingInventory, price) => {
 
         const productToUpdate = await Product.findByPk(id);
 
@@ -34,7 +34,7 @@ module.exports = {
         productToUpdate.description = description;
         productToUpdate.sku = sku;
         productToUpdate.image = image;
-        productToUpdate.categoryId = categoryId;
+        productToUpdate.categoryID = categoryID;
         productToUpdate.remainingInventory = remainingInventory;
         productToUpdate.price = price;
 
@@ -54,13 +54,15 @@ module.exports = {
         return productToDelete;
     },
 
+
     display: async () => {
         const products = await Product.findAll({ include: Category });
         return products;
     },
 
-    category: async (categoryId) => {
-        const products = await Product.findAll({ where: { categoryId: categoryId }, include: Category });
+    category: async (categoryID) => {
+        const products = await Product.findAll({ where: { categoryID: categoryID }, include: Category });
+
         return products;
     }
 }
