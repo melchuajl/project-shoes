@@ -5,7 +5,7 @@ class ProductController {
     //POST owner/products
     async add(req, res) {
 
-        const { name, description, sku, image, categoryId, remainingInventory, price } = req.body;
+        const { name, description, sku, image, categoryID, remainingInventory, price } = req.body;
 
         let result = {
             message: null,
@@ -13,13 +13,13 @@ class ProductController {
             data: null,
         };
 
-        if (!name || !description || !sku || !image || !categoryId || !remainingInventory || !price) {
+        if (!name || !description || !sku || !image || !categoryID || !remainingInventory || !price) {
             res.status(400);
             return res.json({ message: "Incomplete input fields" })
         }
 
         try {
-            const data = await productService.add(name, description, sku, image, categoryId, remainingInventory, price);
+            const data = await productService.add(name, description, sku, image, categoryID, remainingInventory, price);
             result.message = "New product added!";
             result.status = 201; // status code for 'Created'
             result.data = data;
@@ -35,7 +35,7 @@ class ProductController {
     async update(req, res) {
 
         const id = req.params.id;
-        const { name, description, sku, image, categoryId, remainingInventory, price } = req.body;
+        const { name, description, sku, image, categoryID, remainingInventory, price } = req.body;
 
         let result = {
             message: null,
@@ -43,13 +43,13 @@ class ProductController {
             data: null,
         };
 
-        if (typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryId !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
+        if (typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryID !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
             res.status(400);
             return res.json({ message: "Incorrect request data" })
         }
 
         try {
-            const data = await productService.update(id, name, description, sku, image, categoryId, remainingInventory, price);
+            const data = await productService.update(id, name, description, sku, image, categoryID, remainingInventory, price);
             result.message = "Product updated";
             result.status = 200;
             result.data = data;
@@ -87,6 +87,7 @@ class ProductController {
 
     }
 
+
     //GET public/products/
     async display(req, res) {
 
@@ -110,10 +111,8 @@ class ProductController {
         }
     }
 
-    //GET public/products/:categoryId
+    //GET public/products/:categoryID
     async category(req, res) {
-
-        const categoryId = req.params.categoryId;
 
         let result = {
             message: null,
@@ -121,9 +120,12 @@ class ProductController {
             data: null,
         };
 
+        const categoryID = req.params.categoryID;
+
         try {
-            const data = await productService.display(categoryId);
+            const data = await productService.display(categoryID);
             result.message = "Displaying specific products";
+
             result.status = 200;
             result.data = data;
         } catch (error) {

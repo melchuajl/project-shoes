@@ -28,7 +28,7 @@ module.exports = function (sequelize) {
         allowNull: false,
         field: "img_url"
       },
-      categoryId: {
+      categoryID: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: "category_id"

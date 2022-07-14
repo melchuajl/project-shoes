@@ -11,9 +11,9 @@ router.use("/protected", (req, res, next) => {
 const CustomerController = require("../controllers/customer.controller");
 const customerController = new CustomerController();
 
-router.put("/protected/user/:id", auth.isLoggedIn, customerController.update);
-router.delete("/protected/user/:id", auth.isLoggedIn, customerController.delete);
-router.get("/protected/user/:id", auth.isLoggedIn, customerController.display);
+router.get("/protected/customers/", auth.isLoggedIn, customerController.display);
+router.put("/protected/customers/:id", auth.isLoggedIn, customerController.update);
+router.delete("/protected/customers/:id", auth.isLoggedIn, customerController.delete);
 
 //Products
 const ProductController = require('../controllers/product.controller');
