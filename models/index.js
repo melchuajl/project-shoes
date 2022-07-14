@@ -35,11 +35,11 @@ const Customer = require('./customer.model')(sequelize);
 
 // ASSOCIATIONS
 Product.belongsTo(Category, {
-    foreignKey: "category_id"
+    foreignKey: "categoryID"
 });
 
 Cart.belongsTo(Product, {
-    foreignKey: "product_id"
+    foreignKey: "productID"
 })
 
 module.exports = {
