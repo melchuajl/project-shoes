@@ -43,10 +43,10 @@ class ProductController {
             data: null,
         };
 
-        if (typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryID !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
-            res.status(400);
-            return res.json({ message: "Incorrect request data" })
-        }
+        // if (typeof name !== "string" || typeof description !== "string" || typeof sku !== "string" || typeof image !== "string" || typeof categoryID !== "number" || typeof remainingInventory !== "number" || typeof price !== "string") {
+        //     res.status(400);
+        //     return res.json({ message: "Incorrect request data" })
+        // }
 
         try {
             const data = await productService.update(id, name, description, sku, image, categoryID, remainingInventory, price);
@@ -123,7 +123,7 @@ class ProductController {
         const categoryID = req.params.categoryID;
 
         try {
-            const data = await productService.display(categoryID);
+            const data = await productService.category(categoryID);
             result.message = "Displaying specific products";
 
             result.status = 200;

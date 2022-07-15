@@ -22,45 +22,47 @@ module.exports = {
         return newCustomer.save();
     },
 
-    update: async (firstName, lastName, email, pwd, shippingAddress, billingAddress, contact) => {
+    update: async (id, firstName, lastName, shippingAddress, billingAddress, contact) => {
 
-        const customerToUpdate = await Customer.findByPk(email);
+        const customerToUpdate = await Customer.findOne({ where: { id: id } });
 
         if (!customerToUpdate) {
             throw new Error('Account not found');
         }
 
-        customerToUpdate.firstName = firstName;
-        customerToUpdate.lastName = lastName;
-        customerToUpdate.pwd = pwd;
-        customerToUpdate.shippingAddress = shippingAddress;
-        customerToUpdate.billingAddress = billingAddress;
-        customerToUpdate.contact = contact;
+        if (firstName) customerToUpdate.firstName = firstName;
+        if (lastName) customerToUpdate.lastName = lastName;
+        if (shippingAddress) customerToUpdate.shippingAddress = shippingAddress;
+        if (billingAddress) customerToUpdate.billingAddress = billingAddress;
+        if (contact) customerToUpdate.contact = contact;
 
         await customerToUpdate.save();
         return customerToUpdate;
     },
 
-    delete: async (email) => {
 
-        const customerToDelete = await Customer.findOne({ where: { email: email } });
+    delete: async (id) => {
+
+        const customerToDelete = await Customer.findByPk(id);
 
         await customerToDelete.destroy();
         return customerToDelete;
     },
 
-    //GET /protected/user/:id
-    display: async (id) => {
+    display: async () => {
+
+        const customer = await Customer.findAll();
+        return customer;
+    },
+
+    displayOne: async (id) => {
 
         const customer = await Customer.findByPk(id);
-        const infoToDisplay = {
-            firstName: customer.firstName, 
-            lastName: customer.lastName, 
-            email: customer.email, 
-            shippingAddress: customer.shippingAddress, 
-            billingAddress: customer.billingAddress,
-            contact: customer.contact
+
+        if (!customer) {
+            throw new Error('Account not found');
         }
-        return infoToDisplay;
+        return customer;
+
     }
 }
