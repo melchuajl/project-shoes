@@ -23,7 +23,7 @@ class CustomerController {
             result.status = 200;
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
@@ -33,7 +33,8 @@ class CustomerController {
 
     async update(req, res) {
 
-        const { id, firstName, lastName, email, pwd, shippingAddress, billingAddress, contact } = req.body;
+        const id = req.params.id;
+        const { firstName, lastName, shippingAddress, billingAddress, contact } = req.body;
 
         let result = {
             message: null,
@@ -41,23 +42,13 @@ class CustomerController {
             data: null,
         };
 
-        if (!id) {
-            res.status(400);
-            return res.json({ message: "ID field cannot be empty" })
-        }
-
-        if (typeof id !== "number" || typeof firstName !== "string" || typeof lastName !== "string" || typeof email !== "string" || typeof pwd !== "string" || typeof shippingAddress !== "string" || typeof billingAddress !== "string" || typeof contact !== "number") {
-            res.status(400);
-            return res.json({ message: "Incorrect request data" })
-        }
-
         try {
-            const data = await customerService.update(firstName, lastName, email, pwd, shippingAddress, billingAddress, contact);
+            const data = await customerService.update( id, firstName, lastName, shippingAddress, billingAddress, contact);
             result.message = "Account details updated";
             result.status = 200;
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
@@ -81,7 +72,7 @@ class CustomerController {
             result.status = 200;
             result.data = data;
         } catch (error) {
-            res.message = error.message;
+            result.message = error.message;
             result.status = 400;
         } finally {
             return res.json(result);
@@ -90,6 +81,27 @@ class CustomerController {
     }
 
     async display(req, res) {
+
+        let result = {
+            message: null,
+            status: null,
+            data: null,
+        };
+
+        try {
+            const data = await customerService.display();
+            result.message = "Displaying all customers profiles!";
+            result.status = 200;
+            result.data = data;
+        } catch (error) {
+            result.message = error.message;
+            result.status = 400;
+        } finally {
+            return res.json(result);
+        }
+    }
+
+    async displayOne(req, res) {
 
         const id = req.params.id;
 
@@ -100,8 +112,8 @@ class CustomerController {
         };
 
         try {
-            const data = await customerService.display(id);
-            result.message = "Displaying customer profile";
+            const data = await customerService.displayOne(id);
+            result.message = "Displaying customer profile!";
             result.status = 200;
             result.data = data;
         } catch (error) {

@@ -58,26 +58,6 @@ class UserController {
 		}
 	}
 
-	// async retrieve(req, res) {
-    //     let result = {
-    //         message: null,
-    //         status: null,
-    //         data: null,
-    //     };
-
-    //     try {
-    //         const data = await userServiceGetAll();
-    //         result.message = "Retrieval successful";
-    //         result.status = 200;
-    //         result.data = data;
-    //     } catch (error) {
-    //         result.message = error.message;
-    //         result.status = 400;
-    //     } finally {
-    //         return res.json(result);
-    //     }
-
-    // }
 }
 
 module.exports = UserController;

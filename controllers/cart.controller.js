@@ -67,7 +67,7 @@ class CartController {
         try {
             const data = await cartService.edit(productID, quantity);
             result.status = 200;
-            result.message = "Product deleted from cart!"
+            result.message = "Product updated!"
             result.data = data;
         } catch (error) {
             result.status = 400;
@@ -91,7 +91,7 @@ class CartController {
 
         try {
             const data = await cartService.delete(productID)
-            result.message = "Displaying cart";
+            result.message = "Product deleted from cart!";
             result.status = 200;
             result.data = data;
         } catch (error) {

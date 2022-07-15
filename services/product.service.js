@@ -30,13 +30,13 @@ module.exports = {
             throw new Error(`Product ID ${id} not found`);
         }
 
-        productToUpdate.name = name;
-        productToUpdate.description = description;
-        productToUpdate.sku = sku;
-        productToUpdate.image = image;
-        productToUpdate.categoryID = categoryID;
-        productToUpdate.remainingInventory = remainingInventory;
-        productToUpdate.price = price;
+        if (name) productToUpdate.name = name;
+        if (description) productToUpdate.description = description;
+        if (sku) productToUpdate.sku = sku;
+        if (image) productToUpdate.image = image;
+        if (categoryID) productToUpdate.categoryID = categoryID;
+        if (remainingInventory) productToUpdate.remainingInventory = remainingInventory;
+        if (price) productToUpdate.price = price;
 
         await productToUpdate.save();
         return productToUpdate;
