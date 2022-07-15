@@ -22,25 +22,6 @@ module.exports = {
         return newCustomer.save();
     },
 
-    // update: async (id, firstName, lastName, email, shippingAddress, billingAddress, contact) => {
-
-    //     const customerToUpdate = await Customer.findOne({ where: { id: id } });
-
-    //     if (!customerToUpdate) {
-    //         throw new Error('Account not found');
-    //     }
-    //     // customerToUpdate.email = email;
-    //     // customerToUpdate.firstName = firstName;
-    //     // customerToUpdate.lastName = lastName;
-    //     // customerToUpdate.shippingAddress = shippingAddress;
-    //     // customerToUpdate.billingAddress = billingAddress;
-    // //     customerToUpdate.contact = contact;
-    // //     // customerToUpdate.contact = contact;
-
-    //     await customerToUpdate.save();
-    //     return customerToUpdate;
-    // },
-
     update: async (id, firstName, lastName, shippingAddress, billingAddress, contact) => {
 
         const customerToUpdate = await Customer.findOne({ where: { id: id } });
@@ -52,7 +33,7 @@ module.exports = {
         if (firstName) customerToUpdate.firstName = firstName;
         if (lastName) customerToUpdate.lastName = lastName;
         if (shippingAddress) customerToUpdate.shippingAddress = shippingAddress;
-        if (billingAddress) customerToUpdate.billingddress = billingAddress;
+        if (billingAddress) customerToUpdate.billingAddress = billingAddress;
         if (contact) customerToUpdate.contact = contact;
 
         await customerToUpdate.save();
@@ -60,9 +41,9 @@ module.exports = {
     },
 
 
-    delete: async (email) => {
+    delete: async (id) => {
 
-        const customerToDelete = await Customer.findByPk(email);
+        const customerToDelete = await Customer.findByPk(id);
 
         await customerToDelete.destroy();
         return customerToDelete;
@@ -74,4 +55,14 @@ module.exports = {
         return customer;
     },
 
+    displayOne: async (id) => {
+
+        const customer = await Customer.findByPk(id);
+
+        if (!customer) {
+            throw new Error('Account not found');
+        }
+        return customer;
+
+    }
 }
